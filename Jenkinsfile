@@ -16,10 +16,17 @@ pipeline {
                 }
             }
         }
-        stage('Run app') {
+        stage('Delivery') {
             steps {
-                sh 'java -jar target/my-app-1.0-SNAPSHOT.jar'
+                sh "sshpass -p 'vagrant' scp target/my-app-1.0-SNAPSHOT.jar vagrant@192.168.56.104:/home/vagrant/'"
+                sh "sshpass -p 'vagrant' ssh vagrant@192.168.56.104 -t 'java -jar /home/vagrant/my-app-1.0-SNAPSHOT.jar'"
             }
         }
+        
+        // stage('Run app') {
+        //     steps {
+        //         sh 'java -jar target/my-app-1.0-SNAPSHOT.jar'
+        //     }
+        // }
     }
 }
