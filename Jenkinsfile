@@ -1,2 +1,4 @@
 @Library('library-coba@master') _
-deliveryPipeline()
+deliveryPipeline(
+    appName: 'my-app'
+)
